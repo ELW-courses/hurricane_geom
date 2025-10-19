@@ -12,7 +12,7 @@
 #' @details This function establishes column widths and column names, checks for the specified txt file using the file name provided, and loads the data.
 #'  If the file does not exist, an error is returned stating that the file does not exist. 
 #'
-#' @param file_name The full file path to the txt file containing the hurricane data.
+#' @param filename The full file path to the txt file containing the hurricane data.
 #' 
 #' @return tibble object containing the data
 #' @examples

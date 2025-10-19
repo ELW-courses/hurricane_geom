@@ -12,13 +12,6 @@ GeomHurricane
 }
 \arguments{
 \item{GeomHurricane}{\verb{Geom*} name created to plot hurricane data#'}
-
-\item{required_aes}{a character vector of required aesthetics}
-
-\item{default_aes}{default values for aesthetics including color, linewidth, group, size, linetype, color, and alpha level
-Within this param, a value can be provided to scale the hurricane coverage area between 0 (no area) and 1 (whole area)}
-
-\item{draw_key}{function used to draw the key in the legend}
 }
 \value{
 pie-style grpahic showing the wind speed and radius covered by the hurricane

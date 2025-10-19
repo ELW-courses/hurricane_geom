@@ -26,5 +26,5 @@ baseMap
 }
 }
 \seealso{
-\link{clean_hurricane_data}
+\code{\link[=clean_hurricane_data]{clean_hurricane_data()}}
 }

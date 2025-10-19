@@ -16,11 +16,13 @@ geom_hurricane(
 )
 }
 \arguments{
-\item{mapping}{}
+\item{mapping}{aesthetics mapping}
 
 \item{data}{data to be used}
 
 \item{stat}{stat objected with default "identity"}
+
+\item{position}{position object with default "identity"}
 
 \item{na.rm}{handling of NA values, removal default to FALSE}
 
@@ -28,7 +30,7 @@ geom_hurricane(
 
 \item{inherit.aes}{option to inherit aesthetics specified}
 
-\item{postion}{position object with default "identity"}
+\item{...}{additional parameters passed to the function call}
 }
 \value{
 a layer containing a \verb{Geom*} object responsible for rendering the pie-style graphic

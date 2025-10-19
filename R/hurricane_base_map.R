@@ -12,7 +12,7 @@
 #' @description hurricane_base_map uses cleaned hurricane data to get a base map for plotting hurricane data
 #' @details This function uses cleaned hurricane data to calculate the total area coverage of the specified hurricane,
 #' add a buffer, and create a base map for the hurricane data to be plotted on to
-#' @seealso \link{clean_hurricane_data}
+#' @seealso [clean_hurricane_data()]
 #'
 #' @param cleaned_data Object containing the cleaned hurricane data
 #' 
@@ -28,7 +28,7 @@ hurricane_base_map <- function(cleaned_data){
   if(exists("base_plot", envir = globalenv())){rm(base_plot, envir = globalenv())}
   #cleaned data: irene
   (center <- cbind(cleaned_data$longitude, cleaned_data$latitude))
-  (radius <- cleaned_data %>% dplyr::select(ne, se,  sw, nw) %>%
+  (radius <- cleaned_data %>% dplyr::select(.data$ne, .data$se, .data$sw, .data$nw) %>%
       mutate_all(~.*1852)) #Convert nautical knots to meters
   #
   #Empty list to fill
@@ -53,7 +53,7 @@ hurricane_base_map <- function(cleaned_data){
     max_lon = max(hurricane_data$lon)+0.5
   )
   #Get all states and crop to hurricane bb:
-  base_plot <- ggplot2::map_data("state") %>% ggplot(aes(x = long, y = lat, group = group)) + 
+  base_plot <- ggplot2::map_data("state") %>% ggplot(aes(x = .data$long, y = .data$lat, group = .data$group)) + 
     geom_polygon(fill = "#666666", color = "#333333") + 
     theme_void()+ theme(panel.border = element_rect(fill = NULL, color = "black"))+
     coord_equal(xlim = c(bounds$min_lon, bounds$max_lon), ylim = c(bounds$min_lat, bounds$max_lat)) 

@@ -7,7 +7,7 @@
 load_hurricane_data(filename)
 }
 \arguments{
-\item{file_name}{The full file path to the txt file containing the hurricane data.}
+\item{filename}{The full file path to the txt file containing the hurricane data.}
 }
 \value{
 tibble object containing the data

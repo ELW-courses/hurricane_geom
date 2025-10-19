@@ -7,7 +7,7 @@
 ########################################################################
 
 #' @title clean_hurricane_data
-#' @import readr dplyr
+#' @import readr dplyr tidyr
 #' @importFrom lubridate make_datetime
 #' @description clean_hurricane_data cleans the data provided to specific hurricane name and datetime 
 #' @details This function takes the data provided and cleans the data by creating a storm_id column, converting 
@@ -20,16 +20,15 @@
 #' 
 #' @param location_date The date and time point of interest, provided in the format "YYYY-mm-dd-hh-mm"
 #' 
-#' @seealso \link{validate_datetime}
 #' @return tibble object containing the filtered and cleaned data
 #' @examples
 #' \dontrun{
-#' katrina <- clean_hurricane_track(ext_tracks, "Katrina", "2005-08-29-12-00")
+#' katrina <- clean_hurricane_data(ext_tracks, "Katrina", "2005-08-29-12-00")
 #' head(katrina)
 #' }
 #' @export
 #' 
-clean_hurricane_track <- function(hurricane_data, hurricane_name, location_date){
+clean_hurricane_data <- function(hurricane_data, hurricane_name, location_date){
   #Check datetime format
   if(validate_datetime(location_date) == FALSE){
     stop("location_date incorrectly specfied. Should be in the format YYYY-mm-dd-hh-mm")
@@ -37,11 +36,11 @@ clean_hurricane_track <- function(hurricane_data, hurricane_name, location_date)
   #Clean and filter data
   track <- hurricane_data %>% 
     #Update storm_id, longitude columns, create date column
-    dplyr::mutate(storm_id = paste(storm_name, year, sep = "-"),
-                  longitude = longitude*-1, 
-                  date = lubridate::make_datetime(year, as.integer(month), as.integer(day), as.integer(hour))) %>%
+    dplyr::mutate(storm_id = paste(.data$storm_name, .data$year, sep = "-"),
+                  longitude = .data$longitude*-1, 
+                  date = lubridate::make_datetime(.data$year, as.integer(.data$month), as.integer(.data$day), as.integer(.data$hour))) %>%
     #Limit data frame columns
-    dplyr::select(storm_id,  storm_name, date, latitude, longitude, contains("radius")) %>%
+    dplyr::select(.data$storm_id,  .data$storm_name, .data$date, .data$latitude, .data$longitude, contains("radius")) %>%
     #Pivot data to long format 
     tidyr::pivot_longer(cols = starts_with("radius"), names_to = "wind_speed",  names_prefix = "radius_") %>%
     tidyr::separate_wider_delim(wind_speed, "_", names = c("wind_speed", "position")) %>%

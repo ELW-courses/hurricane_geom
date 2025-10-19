@@ -12,19 +12,21 @@
 #' @details The graphic is a pie-style plot showing the radius and speed of winds from hurricane data using the 
 #' ggplot interface.
 #'
-#' @param mapping 
+#' @param mapping aesthetics mapping 
 #' 
 #' @param data data to be used
 #' 
 #' @param stat stat objected with default "identity"
 #' 
-#' @param postion position object with default "identity"
+#' @param position position object with default "identity"
 #' 
 #' @param na.rm handling of NA values, removal default to FALSE
 #' 
 #' @param show.legend option to show or hide the legend with default set to FALSE
 #' 
 #' @param inherit.aes option to inherit aesthetics specified
+#' 
+#' @param ... additional parameters passed to the function call
 #' 
 #' @return a layer containing a `Geom*` object responsible for rendering the pie-style graphic
 #' @examples
