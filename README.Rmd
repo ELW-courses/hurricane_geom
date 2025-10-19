@@ -62,7 +62,7 @@ head(katrina)
 
 Use the cleaned data to create the base map on which to plot the hurricane data, then plot the hurricane data using geom_hurricane.
 
-```{r katrina map}
+```{r Kmap}
 hurricane_base_map(katrina) +
   geom_hurricane(data = katrina, aes(x = longitude, y = latitude, r_ne = ne, r_se = se, r_nw = nw, r_sw =sw, 
                                    speed = wind_speed, fill = wind_speed), group = 1)+
@@ -71,7 +71,7 @@ hurricane_base_map(katrina) +
 
 The plot can be modified to show a percentage of maximum wind radii by specifying the scale_radii parameter.
 
-```{r katrina scale map}
+```{r Kscalemap}
 hurricane_base_map(katrina) +
   geom_hurricane(data = katrina, aes(x = longitude, y = latitude, r_ne = ne, r_se = se, r_nw = nw, r_sw =sw, 
                                    speed = wind_speed, fill = wind_speed), scale_radii = 0.5, group = 1)+
@@ -97,7 +97,7 @@ head(ike)
 
 ### geom_hurricane figure
 
-```{r ike map}
+```{r Ikemap}
 hurricane_base_map(ike) +
   geom_hurricane(data = ike, aes(x = longitude, y = latitude, r_ne = ne, r_se = se, r_nw = nw, r_sw =sw, 
                                    speed = wind_speed, fill = wind_speed), group = 1)+
