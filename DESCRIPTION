@@ -15,6 +15,7 @@ Imports:
     geosphere,
     ggplot2,
     lubridate,
+    maps,
     readr,
     tidyr
 Suggests: 

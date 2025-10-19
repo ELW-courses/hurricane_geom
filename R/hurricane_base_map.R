@@ -7,7 +7,7 @@
 ########################################################################
 
 #' @title hurricane_base_map
-#' @import ggplot2
+#' @import ggplot2 maps
 #' @importFrom geosphere destPoint
 #' @description hurricane_base_map uses cleaned hurricane data to get a base map for plotting hurricane data
 #' @details This function uses cleaned hurricane data to calculate the total area coverage of the specified hurricane,

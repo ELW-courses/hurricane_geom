@@ -13,14 +13,24 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Creating a new geom
-
 <!-- badges: start -->
 <!-- badges: end -->
+
+# Installation
+
+You can install the development version of hurricanegeom with:
+
+```{r install}
+library(devtools)
+install.packages("ELW-courses/hurricanegeom")
+```
+
+# Creating a new geom
 
 > This is a deliverable of the _Building Data Visualization Tools_ course, the 4th course of the *Mastering Software Development in R* sepecialization offered by the Johns Hopkins University.
 
 Within this repo are the files used to create a new `geom_*` used by the `ggplot2` package to visualize the wind speeds associated with hurricanes. Functions are included for reading, cleaning, and outputting hurricane data based on user specified hurricane name and datetime point. Examples are provided for hurricane Katrina and hurricane Ike.  
+
 
 ## Hurricane Katrina
 
@@ -28,22 +38,63 @@ Hurricane Katrina was an Atlantic hurricane made landfall in Buras-Triumph, Loui
 
 ### Data setup and cleaning
 
-```{r cars}
-#summary(cars)
+Load the hurricane data and examine for the hurricane name and time point of interest. 
+
+```{r Katrina load}
+raw_data <- load_hurricane_data(file = "ebtrk_atlc_1988_2015.txt")
+head(raw_data)
 ```
+
+Select the data for hurricane Katrina at 12:00 on August 27, 2011.
+
+```{r Katrina clean}
+katrina <- clean_hurricane_data(raw_data, "Katrina", "2005-08-29-12-00")
+head(katrina)
+```
+
 
 ### geom_hurricane figure
 
-```{r pressure, echo = FALSE}
-#plot(pressure)
+Use the cleaned data to create the base map on which to plot the hurricane data, then plot the hurricane data using geom_hurricane.
+
+```{r katrina map}
+hurricane_base_map(katrina) +
+  geom_hurricane(data = katrina, aes(x = longitude, y = latitude, r_ne = ne, r_se = se, r_nw = nw, r_sw =sw, 
+                                   speed = wind_speed, fill = wind_speed), group = 1)+
+  scale_fill_manual(name = "Wind speed (kts)", values = c("red", "orange", "yellow"))
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub.
+The plot can be modified to show a percentage of maximum wind radii by specifying the scale_radii parameter.
+
+```{r katrina scale map}
+hurricane_base_map(katrina) +
+  geom_hurricane(data = katrina, aes(x = longitude, y = latitude, r_ne = ne, r_se = se, r_nw = nw, r_sw =sw, 
+                                   speed = wind_speed, fill = wind_speed), scale_radii = 0.5, group = 1)+
+  scale_fill_manual(name = "Wind speed (kts)", values = c("red", "orange", "yellow"))
+```
+
+
+
 
 ## Hurricane Ike
 
 Hurricane Ike was an Atlantic hurricane that made landfall first in Cuba then in Galveston, Texas on September 13, 2008 at approximately 2:10 am CDT as a category 2 storm.   
 
-### Data setup and cleaning
+
+Select the data for hurricane Ike at 12:00 on September 13, 2008 and plot resulting data.
+
+### Data cleaning
+
+```{r ike clean}
+ike <- clean_hurricane_data(raw_data, "ike", "2008-09-13-12-00")
+head(ike)
+```
 
 ### geom_hurricane figure
+
+```{r ike map}
+hurricane_base_map(ike) +
+  geom_hurricane(data = ike, aes(x = longitude, y = latitude, r_ne = ne, r_se = se, r_nw = nw, r_sw =sw, 
+                                   speed = wind_speed, fill = wind_speed), group = 1)+
+  scale_fill_manual(name = "Wind speed (kts)", values = c("red", "orange", "yellow"))
+```

@@ -43,8 +43,8 @@ clean_hurricane_data <- function(hurricane_data, hurricane_name, location_date){
     dplyr::select(.data$storm_id,  .data$storm_name, .data$date, .data$latitude, .data$longitude, contains("radius")) %>%
     #Pivot data to long format 
     tidyr::pivot_longer(cols = starts_with("radius"), names_to = "wind_speed",  names_prefix = "radius_") %>%
-    tidyr::separate_wider_delim(wind_speed, "_", names = c("wind_speed", "position")) %>%
-    tidyr::pivot_wider(names_from = position, values_from = value) %>% 
+    tidyr::separate_wider_delim(.data$wind_speed, "_", names = c("wind_speed", "position")) %>%
+    tidyr::pivot_wider(names_from = .data$position, values_from = .data$value) %>% 
     #Subset to hurricane name and date ("YYYY-mm-dd-hh-mm")
     subset(storm_name == toupper(hurricane_name) & date == lubridate::ymd_hm(location_date))
   return(track)
