@@ -23,7 +23,7 @@
 #' @return pie-style grpahic showing the wind speed and radius covered by the hurricane
 #' @export
 #' 
-GeomHurricane <- ggplot2::ggproto("GeomHurricane", Geom,
+GeomHurricane <- ggplot2::ggproto("GeomHurricane", ggplot2::Geom,
                                   required_aes = c("x", 
                                                    "y", 
                                                    "r_ne", #northeast
@@ -39,7 +39,7 @@ GeomHurricane <- ggplot2::ggproto("GeomHurricane", Geom,
                                                              fill = "red", #ref fill
                                                              alpha = 0.7,
                                                              scale_radii = 1.0), #Default value 
-                                  draw_key = draw_key_polygon,
+                                  draw_key = ggplot2::draw_key_polygon,
                                   #
                                   draw_group = function(data, panel_params, coord) {
                                     #Empty object to fill

@@ -21,7 +21,7 @@
 #' }
 #' @export
 #' 
-fars_read <- function(filename) {
+load_hurricane_data <- function(filename) {
   if(!file.exists(filename))
     stop("file '", filename, "' does not exist")
   #Else:
