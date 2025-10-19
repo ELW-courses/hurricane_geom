@@ -13,12 +13,19 @@
 #' ggplot interface.
 #'
 #' @param mapping 
+#' 
 #' @param data data to be used
+#' 
 #' @param stat stat objected with default "identity"
+#' 
 #' @param postion position object with default "identity"
+#' 
 #' @param na.rm handling of NA values, removal default to FALSE
+#' 
 #' @param show.legend option to show or hide the legend with default set to FALSE
+#' 
 #' @param inherit.aes option to inherit aesthetics specified
+#' 
 #' @return a layer containing a `Geom*` object responsible for rendering the pie-style graphic
 #' @examples
 #' \dontrun{
@@ -33,8 +40,9 @@ geom_hurricane <- function(mapping = NULL,
                            stat = "identity",
                            position = "identity",
                            na.rm = FALSE,
-                           show.legend = FALSE,
-                           inherit.aes = TRUE, ...){
+                           show.legend = TRUE,
+                           inherit.aes = TRUE,
+                           ...){
   ggplot2::layer(geom = GeomHurricane,
                  mapping = mapping,
                  data = data,
@@ -42,5 +50,7 @@ geom_hurricane <- function(mapping = NULL,
                  position = position,
                  show.legend = show.legend,
                  inherit.aes = inherit.aes,
-                 params = list(na.rm = na.rm , ...))
+                 params = list(
+                   na.rm = na.rm, ...))
+
 }

@@ -15,6 +15,7 @@
 #' @seealso \link{clean_hurricane_data}
 #'
 #' @param cleaned_data Object containing the cleaned hurricane data
+#' 
 #' @return ggplot2 object showing map location centered on hurricane center
 #' @examples
 #' \dontrun{
@@ -54,7 +55,7 @@ hurricane_base_map <- function(cleaned_data){
   #Get all states and crop to hurricane bb:
   base_plot <- ggplot2::map_data("state") %>% ggplot(aes(x = long, y = lat, group = group)) + 
     geom_polygon(fill = "#666666", color = "#333333") + 
-    theme_void()+
+    theme_void()+ theme(panel.border = element_rect(fill = NULL, color = "black"))+
     coord_equal(xlim = c(bounds$min_lon, bounds$max_lon), ylim = c(bounds$min_lat, bounds$max_lat)) 
   #
   return(base_plot)

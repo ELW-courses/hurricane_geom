@@ -13,6 +13,7 @@
 #'  If the file does not exist, an error is returned stating that the file does not exist. 
 #'
 #' @param file_name The full file path to the txt file containing the hurricane data.
+#' 
 #' @return tibble object containing the data
 #' @examples
 #' \dontrun{
@@ -22,6 +23,7 @@
 #' @export
 #' 
 load_hurricane_data <- function(filename) {
+  filename <- system.file("extdata", filename, package = "hurricanegeom", mustWork = TRUE)
   if(!file.exists(filename))
     stop("file '", filename, "' does not exist")
   #Else:
@@ -32,7 +34,7 @@ load_hurricane_data <- function(filename) {
                            paste("radius_50", c("ne", "se", "sw", "nw"), sep = "_"),
                            paste("radius_64", c("ne", "se", "sw", "nw"), sep = "_"),
                            "storm_type", "distance_to_land", "final")
-  ext_tracks <- readr::read_fwf(file_name, 
+  ext_tracks <- readr::read_fwf(filename, 
                                 readr::fwf_widths(ext_tracks_widths, ext_tracks_colnames),
                                 na = "-99")
 }

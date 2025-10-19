@@ -13,13 +13,18 @@
 #' @description Creates a new `Geom*` to show hurricane strength and coverage
 #' @details The `Geom*` is created by calculating the center of the hurricane at the datetime provided in the data,
 #' converts the radial distance covered for plotting, calculates the area covered by each wind speed portion, and
-#' creates a grob for each wind speed area for each quadrant around the hurricane's center.
+#' creates a grob for each wind speed area for each quadrant around the hurricane's center. The function sets the
+#' deafult color scale to yellow = strongest winds, orange = medium winds, and red = weakest winds.
 #'
 #' @param GeomHurricane `Geom*` name created to plot hurricane data#'
+#' 
 #' @param required_aes a character vector of required aesthetics
+#' 
 #' @param default_aes default values for aesthetics including color, linewidth, group, size, linetype, color, and alpha level
 #' Within this param, a value can be provided to scale the hurricane coverage area between 0 (no area) and 1 (whole area)
+#' 
 #' @param draw_key function used to draw the key in the legend
+#' 
 #' @return pie-style grpahic showing the wind speed and radius covered by the hurricane
 #' @export
 #' 
@@ -31,12 +36,12 @@ GeomHurricane <- ggplot2::ggproto("GeomHurricane", ggplot2::Geom,
                                                    "r_sw", #southwest
                                                    "r_nw", #northwest
                                                    "speed"), #Wind speeds
-                                  default_aes = ggplot2::aes(color = "black", 
+                                  default_aes = ggplot2::aes(color = NA, 
                                                              linewidth = 0.5, 
                                                              group = 1, 
                                                              size = 1,
                                                              linetype = 0, #no outline
-                                                             fill = "red", #ref fill
+                                                             fill = NA, #ref fill
                                                              alpha = 0.7,
                                                              scale_radii = 1.0), #Default value 
                                   draw_key = ggplot2::draw_key_polygon,
@@ -52,9 +57,15 @@ GeomHurricane <- ggplot2::ggproto("GeomHurricane", ggplot2::Geom,
                                       mutate_all(~.*1852*data$scale_radii) #Convert nautical knots to meters and scale radius
                                     #
                                     ##Create mapping for colors and fills based on scales
-                                    colors <- c("red", "orange", "yellow")
-                                    color_map <- setNames(colors, sort(speeds))
-                                    fill_map <- color_map
+                                    # Get colors from mapping or generate defaults
+                                    if (!is.null(data$fill)) {
+                                      fills <- unique(data$fill)
+                                    } else {
+                                      fills <- scales::hue_pal()(length(speeds))
+                                    }
+                                    #colors <- c("red", "orange", "yellow")
+                                    fill_map <- setNames(fills, sort(speeds))
+                                    color_map <- fill_map
                                     #
                                     ##Loop to get wind_speed and radius values for each quadrant
                                     for(r in 1:4){ #For each quadrant

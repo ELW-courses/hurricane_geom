@@ -7,15 +7,19 @@
 ########################################################################
 
 #' @title clean_hurricane_data
-#' @import readr 
+#' @import readr dplyr
+#' @importFrom lubridate make_datetime
 #' @description clean_hurricane_data cleans the data provided to specific hurricane name and datetime 
 #' @details This function takes the data provided and cleans the data by creating a storm_id column, converting 
 #' longitude data, and ensuring dates are in the proper format. The data is then modified to gather wind 
 #' speed and distance of coverage before filtering by the provided hurricane name and datetime of interest
 #'
 #' @param hurricane_data The object containing the hurricane data 
+#' 
 #' @param hurricane_name The name of the hurricane of interest
+#' 
 #' @param location_date The date and time point of interest, provided in the format "YYYY-mm-dd-hh-mm"
+#' 
 #' @seealso \link{validate_datetime}
 #' @return tibble object containing the filtered and cleaned data
 #' @examples
@@ -35,7 +39,7 @@ clean_hurricane_track <- function(hurricane_data, hurricane_name, location_date)
     #Update storm_id, longitude columns, create date column
     dplyr::mutate(storm_id = paste(storm_name, year, sep = "-"),
                   longitude = longitude*-1, 
-                  date = make_datetime(year, as.integer(month), as.integer(day), as.integer(hour))) %>%
+                  date = lubridate::make_datetime(year, as.integer(month), as.integer(day), as.integer(hour))) %>%
     #Limit data frame columns
     dplyr::select(storm_id,  storm_name, date, latitude, longitude, contains("radius")) %>%
     #Pivot data to long format 
