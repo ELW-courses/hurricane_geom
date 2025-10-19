@@ -14,6 +14,7 @@ knitr::opts_chunk$set(
 ```
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/ELW-courses/hurricane_geom/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ELW-courses/hurricane_geom/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 # Installation
@@ -31,6 +32,10 @@ install.packages("ELW-courses/hurricanegeom")
 
 Within this repo are the files used to create a new `geom_*` used by the `ggplot2` package to visualize the wind speeds associated with hurricanes. Functions are included for reading, cleaning, and outputting hurricane data based on user specified hurricane name and datetime point. Examples are provided for hurricane Katrina and hurricane Ike.  
 
+```{r library}
+library(hurricanegeom)
+library(ggplot2)
+```
 
 ## Hurricane Katrina
 
