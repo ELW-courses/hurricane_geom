@@ -1,0 +1,12 @@
+Package: hurricanegeom
+Title: Load, Clean, And Plot Hurricane Data
+Version: 0.0.0.9000
+Authors@R: 
+    person("EL", "Williams", email = "placeholder@gmail.com", role = c("aut", "cre"))
+Description: A set of functions to load hurricane data, clean and filter to a specific hurricane and timepoint in the 
+  hurricane's track, and plot the hurricane's wind speeds and radial coverage. Additional function included to automate 
+  the creation of a base map on which to plot the hurricane data.
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
